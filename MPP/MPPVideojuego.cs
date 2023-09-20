@@ -17,7 +17,7 @@ namespace MPP
             cmd.Connection = conexion.Conectar();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "InsertarVideojuego";
-            cmd.Parameters.AddWithValue("@id", videojuego.Nombre);
+            cmd.Parameters.AddWithValue("@id", videojuego.ID);
             cmd.Parameters.AddWithValue("@nombre", videojuego.Nombre);
             cmd.Parameters.AddWithValue("@estudio", videojuego.Estudio);
             cmd.Parameters.AddWithValue("@genero", videojuego.Genero);
@@ -31,7 +31,12 @@ namespace MPP
             cmd.Connection  = conexion.Conectar();
             cmd.CommandType= System.Data.CommandType.StoredProcedure;
             cmd.CommandText  = "ModificarVideojuego";
-            cmd.Parameters.AddWithValue("@id", videojuego.Nombre);
+            cmd.Parameters.AddWithValue("@id", videojuego.ID);
+            cmd.Parameters.AddWithValue("@nombre", videojuego.Nombre);
+            cmd.Parameters.AddWithValue("@estudio", videojuego.Estudio);
+            cmd.Parameters.AddWithValue("@genero", videojuego.Genero);
+            cmd.ExecuteNonQuery();
+            conexion.Desconectar();
         }
         public void EliminarVideojuego(BE_Videojuego videojuego)
         {

@@ -84,3 +84,13 @@ BEGIN
 Delete from Jugador  Where ID=@id
 
 END
+
+
+CREATE PROCEDURE Top3Jugadores
+AS
+BEGIN
+SELECT TOP 3 IDJugador, IDVideojuego, Puntaje
+FROM Puntaje
+ORDER BY IDJugador DESC, Score DESC
+END
+GO

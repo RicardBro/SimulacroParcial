@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MPP;
+using BE;
 
 namespace UnitTestSimuParcial
 {
 
     [TestClass]
-    public class Test_InsertarJugador
+    public class Test_Jugador
     {
         /*
         public Test_InsertarJugador()
@@ -62,7 +63,7 @@ namespace UnitTestSimuParcial
             jugador.Apellido = "Solis";
             jugador.FechaNacimiento = DateTime.Now;
             jugador.Usuario = "GSolis";
-            jugador.ID = 5;
+            jugador.ID = 6;
 
             mpp.InsertarJugador(jugador);
             Assert.IsTrue(true);
@@ -109,6 +110,38 @@ namespace UnitTestSimuParcial
             jugador.ID = 5;
             mpp.EliminarJugador(jugador);
             Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TestIngresarScore()
+        {
+            MPPJugador mpp = new MPPJugador();
+            BE.BE_Jugador jugador = new BE.BE_Jugador();
+            BE.BE_Videojuego videojuego = new BE.BE_Videojuego();
+            jugador.ID = 1;
+            videojuego.ID = 1;
+            jugador.Score = 250;
+            mpp.InssertarScoreJugador(jugador, videojuego);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TestListarScoreJugador()
+        {
+            MPPJugador mpp = new MPPJugador();
+            
+            BE.BE_Videojuego videojuego = new BE.BE_Videojuego();
+            //jugador.ID = 1;
+            videojuego.ID = 2;
+            List<BE.BE_Jugador> jugadores = new List<BE.BE_Jugador>();
+            jugadores = mpp.ListarJugadoresPorScore(videojuego);
+            Assert.IsTrue(jugadores.Count > 0);
+            foreach (BE.BE_Jugador jug in jugadores)
+            {
+                Console.WriteLine(jug.ID);
+                Console.WriteLine(jug.Score);
+
+            }
         }
     }
 }

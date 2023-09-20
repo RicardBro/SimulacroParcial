@@ -51,8 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test_Videojuego.cs" />
     <Compile Include="Test_conexion.cs" />
-    <Compile Include="Test_InsertarJugador.cs" />
+    <Compile Include="Test_Jugador.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,9 +16,7 @@ namespace MPP
             conexion.Conectar();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conexion.Conectar();
-            //Storeprocedure
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //
             cmd.CommandText = "InsertarJugador";
             cmd.Parameters.AddWithValue("@nombre", jugador.Nombre);
             cmd.Parameters.AddWithValue("@apellido", jugador.Apellido);
@@ -77,5 +75,38 @@ namespace MPP
             return listaJugadores;
         }
 
+        public void InssertarScoreJugador(BE_Jugador jugador,BE_Videojuego juego)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conexion.Conectar();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "InsertarScore";
+            cmd.Parameters.AddWithValue("@id_jugador", jugador.ID);
+            cmd.Parameters.AddWithValue("@id_juego", juego.ID);
+            cmd.Parameters.AddWithValue("@score", jugador.Score);
+            cmd.ExecuteNonQuery();
+            conexion.Desconectar();
+        }
+
+        public List<BE_Jugador> ListarJugadoresPorScore(BE_Videojuego juego)
+        {
+            conexion.Conectar();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conexion.Conectar();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "Top3Jugadores";
+            cmd.Parameters.AddWithValue("@id_juego", juego.ID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<BE_Jugador> listaJugadores = new List<BE_Jugador>();
+            while (dr.Read())
+            {
+                BE_Jugador jugador = new BE_Jugador();
+                jugador.ID = Convert.ToInt32(dr["id_jugador"]);
+                jugador.Score = Convert.ToInt32(dr["score"]);
+                listaJugadores.Add(jugador);
+            }
+            conexion.Desconectar();
+            return listaJugadores;
+        }
     }
 }
