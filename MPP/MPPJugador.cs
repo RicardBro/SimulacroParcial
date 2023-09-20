@@ -51,6 +51,7 @@ namespace MPP
             cmd.Parameters.AddWithValue("@id", jugador.ID);
             cmd.ExecuteNonQuery();
             conexion.Desconectar();
+            cmd.CommandText = "delete from jugador where id= @id";
         }
         public List<BE_Jugador> ListarJugadores()
         {
